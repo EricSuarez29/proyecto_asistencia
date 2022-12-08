@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,12 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/career/insert', [CareerController::class, 'store']);
     Route::put('/career/update/{id}', [CareerController::class, 'update']);
     Route::delete('/career/delete/{id}', [CareerController::class, 'destroy']);
+
+    //APIs de alumno
+    Route::get('/student/getAll/{teacher_id}', [StudentController::class, 'index']);
+    Route::post('/student/insert', [StudentController::class, 'store']);
+    Route::put('/student/update/{id}', [StudentController::class, 'update']);
+    Route::delete('/student/delete/{id}', [StudentController::class, 'destroy']);
 });
 
 Route::post('/register', [AuthController::class, 'register']);

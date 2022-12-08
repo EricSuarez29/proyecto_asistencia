@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
@@ -12,9 +13,36 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($teacher_id)
     {
-        //
+        $response_flag = 3;
+        $result = null;
+        $trace = null;
+        try{
+            $students = Student::select('id', DB::raw('CONCAT(name, " ", middle_name, " ", last_name) AS nombre_completo'))
+            ->where('teacher_id', '=', $teacher_id)
+            ->get();
+            $result = $students;
+            $response_flag = 1;
+        }
+        catch (\ErrorException $e) {
+            $response_flag = 2;
+            $result = $e->getMessage();
+            $trace = $e->getTrace();
+        }
+        catch (\Illuminate\Database\QueryException $e) {
+            $response_flag = 2;
+            $result = $e->errorInfo[2];
+            $trace = $e->getTrace();
+        }
+        finally {
+            $data = [
+                "response" => $result,
+                "response_flag" => $response_flag,
+                "trace" => $trace
+            ];
+            return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
+        }
     }
 
     /**
@@ -69,34 +97,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($teacher_id)
+    public function show($id)
     {
-        $response_flag = 3;
-        $result = null;
-        $trace = null;
-        try{
-            $students = Student::where('teacher_id', '=', $teacher_id)->get();
-            $result = $students;
-            $response_flag = 1;
-        }
-        catch (\ErrorException $e) {
-            $response_flag = 2;
-            $result = $e->getMessage();
-            $trace = $e->getTrace();
-        }
-        catch (\Illuminate\Database\QueryException $e) {
-            $response_flag = 2;
-            $result = $e->errorInfo[2];
-            $trace = $e->getTrace();
-        }
-        finally {
-            $data = [
-                "response" => $result,
-                "response_flag" => $response_flag,
-                "trace" => $trace
-            ];
-            return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
-        }
+        //
     }
 
     /**
