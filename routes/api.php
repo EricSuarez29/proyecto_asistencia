@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,12 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/student/insert', [StudentController::class, 'store']);
     Route::put('/student/update/{id}', [StudentController::class, 'update']);
     Route::delete('/student/delete/{id}', [StudentController::class, 'destroy']);
+
+    //APIs de materia
+    Route::get('/subject/getAll/{teacher_id}', [SubjectController::class, 'index']);
+    Route::post('/subject/insert', [SubjectController::class, 'store']);
+    Route::put('/subject/update/{id}', [SubjectController::class, 'update']);
+    Route::delete('/subject/delete/{id}', [SubjectController::class, 'delete']);
 });
 
 Route::post('/register', [AuthController::class, 'register']);
