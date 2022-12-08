@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
-use App\Models\GroupStudent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use stdClass;
@@ -101,12 +100,13 @@ class GroupController extends Controller
     public function show($id)
     {
         $response_flag = 3;
-        $result = new stdClass();
+        $result = null;
         $trace = null;
         try {
             $group = Group::find($id);
             $students = $group->students()->get();
-            $result = [$group, $students];
+            $group->alumnos = $students;
+            $result = $group;
             $response_flag = 1;
         } catch (\ErrorException $e) {
             $response_flag = 2;
