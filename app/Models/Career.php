@@ -13,6 +13,9 @@ class Career extends Model
     protected $fillable = [
         'name',
         'acronym',
+        'school_id',
         'teacher_id'
     ];
+
+    
 }

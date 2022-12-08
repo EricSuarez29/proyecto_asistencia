@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Career;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CareerController extends Controller
 {
@@ -12,9 +13,38 @@ class CareerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($teacher_id)
     {
-        //
+        $response_flag = 3;
+        $result = null;
+        $trace = null;
+        try{
+            $careers = Career::join('schools', 'schools.id', "=", 'careers.school_id')
+            ->select('careers.id', 'careers.name', 'careers.acronym', DB::raw('schools.name AS school_name'))
+            ->where('careers.teacher_id', '=', $teacher_id)
+            ->orderBy('careers.name')
+            ->get();
+            $result = $careers;
+            $response_flag = 1;
+        }
+        catch (\ErrorException $e) {
+            $response_flag = 2;
+            $result = $e->getMessage();
+            $trace = $e->getTrace();
+        }
+        catch (\Illuminate\Database\QueryException $e) {
+            $response_flag = 2;
+            $result = $e->errorInfo[2];
+            $trace = $e->getTrace();
+        }
+        finally {
+            $data = [
+                "response" => $result,
+                "response_flag" => $response_flag,
+                "trace" => $trace
+            ];
+            return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
+        }
     }
 
     /**
@@ -69,34 +99,9 @@ class CareerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($teacher_id)
+    public function show()
     {
-        $response_flag = 3;
-        $result = null;
-        $trace = null;
-        try{
-            $careers = Career::where('teacher_id', '=', $teacher_id)->get();
-            $result = $careers;
-            $response_flag = 1;
-        }
-        catch (\ErrorException $e) {
-            $response_flag = 2;
-            $result = $e->getMessage();
-            $trace = $e->getTrace();
-        }
-        catch (\Illuminate\Database\QueryException $e) {
-            $response_flag = 2;
-            $result = $e->errorInfo[2];
-            $trace = $e->getTrace();
-        }
-        finally {
-            $data = [
-                "response" => $result,
-                "response_flag" => $response_flag,
-                "trace" => $trace
-            ];
-            return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
-        }
+        //
     }
 
     /**
@@ -126,6 +131,7 @@ class CareerController extends Controller
             $career = Career::find($id);
             $career->name = $request->name;
             $career->acronym = $request->acronym;
+            $career->school_id = $request->school_id;
             $career->save();
             $response_flag = 1;
         }
