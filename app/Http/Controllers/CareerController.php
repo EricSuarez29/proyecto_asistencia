@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Career;
 use Illuminate\Http\Request;
 
 class CareerController extends Controller
@@ -34,7 +35,32 @@ class CareerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $response_flag = 3;
+        $result = null;
+        $trace = null;
+        try{
+            $career = new Career($request->all());
+            $career->save();
+            $response_flag = 1;
+        }
+        catch (\ErrorException $e) {
+            $response_flag = 2;
+            $result = $e->getMessage();
+            $trace = $e->getTrace();
+        }
+        catch (\Illuminate\Database\QueryException $e) {
+            $response_flag = 2;
+            $result = $e->errorInfo[2];
+            $trace = $e->getTrace();
+        }
+        finally {
+            $data = [
+                "response" => $result,
+                "response_flag" => $response_flag,
+                "trace" => $trace
+            ];
+            return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
+        }
     }
 
     /**
@@ -43,9 +69,34 @@ class CareerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($teacher_id)
     {
-        //
+        $response_flag = 3;
+        $result = null;
+        $trace = null;
+        try{
+            $careers = Career::where('teacher_id', '=', $teacher_id)->get();
+            $result = $careers;
+            $response_flag = 1;
+        }
+        catch (\ErrorException $e) {
+            $response_flag = 2;
+            $result = $e->getMessage();
+            $trace = $e->getTrace();
+        }
+        catch (\Illuminate\Database\QueryException $e) {
+            $response_flag = 2;
+            $result = $e->errorInfo[2];
+            $trace = $e->getTrace();
+        }
+        finally {
+            $data = [
+                "response" => $result,
+                "response_flag" => $response_flag,
+                "trace" => $trace
+            ];
+            return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
+        }
     }
 
     /**
@@ -68,7 +119,34 @@ class CareerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $response_flag = 3;
+        $result = null;
+        $trace = null;
+        try{
+            $career = Career::find($id);
+            $career->name = $request->name;
+            $career->acronym = $request->acronym;
+            $career->save();
+            $response_flag = 1;
+        }
+        catch (\ErrorException $e) {
+            $response_flag = 2;
+            $result = $e->getMessage();
+            $trace = $e->getTrace();
+        }
+        catch (\Illuminate\Database\QueryException $e) {
+            $response_flag = 2;
+            $result = $e->errorInfo[2];
+            $trace = $e->getTrace();
+        }
+        finally {
+            $data = [
+                "response" => $result,
+                "response_flag" => $response_flag,
+                "trace" => $trace
+            ];
+            return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
+        }
     }
 
     /**
@@ -79,6 +157,31 @@ class CareerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $response_flag = 3;
+        $result = null;
+        $trace = null;
+        try{
+            $career = Career::find($id);
+            $career->delete();
+            $response_flag = 1;
+        }
+        catch (\ErrorException $e) {
+            $response_flag = 2;
+            $result = $e->getMessage();
+            $trace = $e->getTrace();
+        }
+        catch (\Illuminate\Database\QueryException $e) {
+            $response_flag = 2;
+            $result = $e->errorInfo[2];
+            $trace = $e->getTrace();
+        }
+        finally {
+            $data = [
+                "response" => $result,
+                "response_flag" => $response_flag,
+                "trace" => $trace
+            ];
+            return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
+        }
     }
 }

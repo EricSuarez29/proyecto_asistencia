@@ -12,34 +12,9 @@ class SchoolController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($teacher_id)
+    public function index()
     {
-        $response_flag = 3;
-        $result = null;
-        $trace = null;
-        try{
-            $schools = School::where('teacher_id', '=', $teacher_id)->get();
-            $result = $schools;
-            $response_flag = 1;
-        }
-        catch (\ErrorException $e) {
-            $response_flag = 2;
-            $result = $e->getMessage();
-            $trace = $e->getTrace();
-        }
-        catch (\Illuminate\Database\QueryException $e) {
-            $response_flag = 2;
-            $result = $e->errorInfo[2];
-            $trace = $e->getTrace();
-        }
-        finally {
-            $data = [
-                "response" => $result,
-                "response_flag" => $response_flag,
-                "trace" => $trace
-            ];
-            return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
-        }
+        //
     }
 
     /**
@@ -94,9 +69,34 @@ class SchoolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($teacher_id)
     {
-        //
+        $response_flag = 3;
+        $result = null;
+        $trace = null;
+        try{
+            $schools = School::where('teacher_id', '=', $teacher_id)->get();
+            $result = $schools;
+            $response_flag = 1;
+        }
+        catch (\ErrorException $e) {
+            $response_flag = 2;
+            $result = $e->getMessage();
+            $trace = $e->getTrace();
+        }
+        catch (\Illuminate\Database\QueryException $e) {
+            $response_flag = 2;
+            $result = $e->errorInfo[2];
+            $trace = $e->getTrace();
+        }
+        finally {
+            $data = [
+                "response" => $result,
+                "response_flag" => $response_flag,
+                "trace" => $trace
+            ];
+            return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
+        }
     }
 
     /**
