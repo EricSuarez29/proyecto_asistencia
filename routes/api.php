@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CareerController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
@@ -47,6 +48,13 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/subject/insert', [SubjectController::class, 'store']);
     Route::put('/subject/update/{id}', [SubjectController::class, 'update']);
     Route::delete('/subject/delete/{id}', [SubjectController::class, 'delete']);
+
+    //APIs de grupo
+    Route::get('/group/getAll/{teacher_id}', [GroupController::class, 'index']);
+    Route::get('/group/show/{id}', [GroupController::class, 'show']);
+    Route::post('/group/insert', [GroupController::class, 'store']);
+    Route::put('/group/update/{id}', [GroupController::class, 'update']);
+    Route::delete('/group/delete/{id}', [GroupController::class, 'destroy']);
 });
 
 Route::post('/register', [AuthController::class, 'register']);
