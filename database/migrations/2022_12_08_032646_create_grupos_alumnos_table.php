@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('career', function (Blueprint $table) {
+        Schema::create('grupos_alumnos', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->string('acronym', 5);
-            $table->integer('school_id')->references('id')->on('schools');
-            $table->integer('teacher_id')->references('id')->on('teachers');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->integer('group_id')->references('id')->on('groups');
+            $table->integer('student_id')->references('id')->on('students');
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('career');
+        Schema::dropIfExists('grupos_alumnos');
     }
 };

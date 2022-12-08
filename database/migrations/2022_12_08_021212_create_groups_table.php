@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('career', function (Blueprint $table) {
+        Schema::create('groups', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100);
-            $table->string('acronym', 5);
-            $table->integer('school_id')->references('id')->on('schools');
+            $table->string('number', 3);
+            $table->integer('career_id')->references('id')->on('careers');
             $table->integer('teacher_id')->references('id')->on('teachers');
             $table->timestamps();
             $table->softDeletes();
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('career');
+        Schema::dropIfExists('groups');
     }
 };
