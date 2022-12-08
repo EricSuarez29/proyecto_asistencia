@@ -24,6 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+/*
 Route::group(['middleware' => ['auth:sanctum']], function(){
     //APIs de escuela
     Route::get('/school/getAll/{teacher_id}', [SchoolController::class, 'index']);
@@ -55,7 +56,7 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/group/insert', [GroupController::class, 'store']);
     Route::put('/group/update/{id}', [GroupController::class, 'update']);
     Route::delete('/group/delete/{id}', [GroupController::class, 'destroy']);
-});
+});*/
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);

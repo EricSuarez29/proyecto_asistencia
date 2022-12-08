@@ -14,9 +14,9 @@ class GroupController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($teacher_id)
+    public function index()
     {
-        $response_flag = 3;
+        /*$response_flag = 3;
         $result = null;
         $trace = null;
         try {
@@ -42,7 +42,8 @@ class GroupController extends Controller
                 "trace" => $trace
             ];
             return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
-        }
+        }*/
+        return view('pages.group.list');
     }
 
     /**
@@ -52,7 +53,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.group.form');
     }
 
     /**
