@@ -70,7 +70,8 @@
                         <tr>
                             @foreach ($attendanceList->classDays as $classDay)
                             <th colspan="{{ $classDay->classHours()->count() }}"
-                                class="text-center px-0 border border-right " style="word-wrap: break-word;">{{
+                                class="text-center px-0 border border-right "
+                                style="word-wrap: break-word; transform: rotate(90deg)">{{
                                 $classDay->getFormated()
                                 }}</th>
                             @endforeach
