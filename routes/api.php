@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ListController;
 use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
@@ -55,6 +56,10 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::post('/group/insert', [GroupController::class, 'store']);
     Route::put('/group/update/{id}', [GroupController::class, 'update']);
     Route::delete('/group/delete/{id}', [GroupController::class, 'destroy']);
+
+    //APIs de lista
+    Route::get('/list/getAll/{teacher_id}', [ListController::class, 'index']);
+    Route::post('/list/insert', [ListController::class, 'store']);
 });
 
 Route::post('/register', [AuthController::class, 'register']);
