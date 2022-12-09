@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('period_id')->references('id')->on('periods');
             $table->integer('group_id')->references('id')->on('groups');
             $table->integer('subject_id')->references('id')->on('subjects');
-            $table->integer('teacher_id')->references('id')->on('teachers');
+            //$table->integer('teacher_id')->references('id')->on('teachers');
             $table->timestamps();
             $table->softDeletes();
         });

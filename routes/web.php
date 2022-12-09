@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AssistanceListController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -33,11 +34,18 @@ Route::controller(AssistanceListController::class)
         Route::post('/', 'store')->name('store');
     });
 
+Route::controller(StudentController::class)
+    ->name('students.')
+    ->prefix('students')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+    });
+
 //Attendance List section
-Route::get('/attendanceList', fn () => view('pages.attendanceList.attendanceL'))->name('attendanceList');
+//Route::get('/attendanceList', fn () => view('pages.attendanceList.attendanceL'))->name('attendanceList');
 
 //Assistance generator section
 //  Route::get('/assistanceGenerator', fn () => view('pages.assistanceGenerator.assistanceG'))->name('assistanceGenerator');
 
 //saved groups section
-Route::get('/savedGroups', fn () => view('pages.savedGroups.savedGroups'))->name('savedGroups');
+//Route::get('/savedGroups', fn () => view('pages.savedGroups.savedGroups'))->name('savedGroups');

@@ -12,6 +12,12 @@ $routes = [
 'icon' => 'fas fa-users',
 'color' => 'text-info',
 ],
+[
+'label' => 'Alumnos',
+'routeName' => 'students.index',
+'icon' => 'fas fa-user',
+'color' => 'text-yellow',
+],
 // [
 // 'label' => 'Alumnos',
 // 'routeName' => 'pupils',

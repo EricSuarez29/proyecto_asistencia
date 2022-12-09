@@ -72,8 +72,8 @@ class GroupController extends Controller
         try {
             $group = new Group($request->all());
             $group->save();
-            foreach ($request->alumnos as $key => $alumno) {
-                $group->students()->attach($alumno['id']);
+            foreach ($request->alumnos as $alumnoId) {
+                $group->students()->attach($alumnoId);
             }
             $response_flag = 1;
         } catch (\ErrorException $e) {

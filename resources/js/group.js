@@ -1,1 +1,1 @@
-console.log("hello group");
+const API = "/api/students/1";

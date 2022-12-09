@@ -13,9 +13,9 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($teacher_id)
+    public function index()
     {
-        $response_flag = 3;
+        /*$response_flag = 3;
         $result = null;
         $trace = null;
         try{
@@ -42,7 +42,9 @@ class StudentController extends Controller
                 "trace" => $trace
             ];
             return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
-        }
+        }*/
+        $students = Student::all();
+        return view('pages.students.list', ['students' => $students]);
     }
 
     /**
@@ -66,22 +68,19 @@ class StudentController extends Controller
         $response_flag = 3;
         $result = null;
         $trace = null;
-        try{
+        try {
             $student = new Student($request->all());
             $student->save();
             $response_flag = 1;
-        }
-        catch (\ErrorException $e) {
+        } catch (\ErrorException $e) {
             $response_flag = 2;
             $result = $e->getMessage();
             $trace = $e->getTrace();
-        }
-        catch (\Illuminate\Database\QueryException $e) {
+        } catch (\Illuminate\Database\QueryException $e) {
             $response_flag = 2;
             $result = $e->errorInfo[2];
             $trace = $e->getTrace();
-        }
-        finally {
+        } finally {
             $data = [
                 "response" => $result,
                 "response_flag" => $response_flag,
@@ -97,9 +96,9 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Student $student)
     {
-        //
+        return response()->json($student);
     }
 
     /**
@@ -125,25 +124,22 @@ class StudentController extends Controller
         $response_flag = 3;
         $result = null;
         $trace = null;
-        try{
+        try {
             $student = Student::find($id);
             $student->name = $request->name;
             $student->middle_name = $request->middle_name;
             $student->last_name = $request->last_name;
             $student->save();
             $response_flag = 1;
-        }
-        catch (\ErrorException $e) {
+        } catch (\ErrorException $e) {
             $response_flag = 2;
             $result = $e->getMessage();
             $trace = $e->getTrace();
-        }
-        catch (\Illuminate\Database\QueryException $e) {
+        } catch (\Illuminate\Database\QueryException $e) {
             $response_flag = 2;
             $result = $e->errorInfo[2];
             $trace = $e->getTrace();
-        }
-        finally {
+        } finally {
             $data = [
                 "response" => $result,
                 "response_flag" => $response_flag,
@@ -164,22 +160,19 @@ class StudentController extends Controller
         $response_flag = 3;
         $result = null;
         $trace = null;
-        try{
+        try {
             $student = Student::find($id);
             $student->delete();
             $response_flag = 1;
-        }
-        catch (\ErrorException $e) {
+        } catch (\ErrorException $e) {
             $response_flag = 2;
             $result = $e->getMessage();
             $trace = $e->getTrace();
-        }
-        catch (\Illuminate\Database\QueryException $e) {
+        } catch (\Illuminate\Database\QueryException $e) {
             $response_flag = 2;
             $result = $e->errorInfo[2];
             $trace = $e->getTrace();
-        }
-        finally {
+        } finally {
             $data = [
                 "response" => $result,
                 "response_flag" => $response_flag,

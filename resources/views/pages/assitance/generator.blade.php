@@ -38,6 +38,7 @@
             </div>
             <div class="card-body">
                 <form action="{{ route('assistanceList.store') }}" method="POST">
+                    @csrf
                     <div class="pl-lg-4">
                         <div style="color:#5e72e4;">
                             <i class="fa-light fa-gear"></i>
@@ -75,7 +76,7 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
-                                                <input type="checkbox" name="checkMonday"
+                                                <input type="checkbox" name="Monday"
                                                     aria-label="Checkbox for following text input">
                                             </div>
                                         </div>
@@ -90,7 +91,7 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
-                                                <input type="checkbox" name="checkTuesday"
+                                                <input type="checkbox" name="Tuesday"
                                                     aria-label="Checkbox for following text input">
                                             </div>
                                         </div>
@@ -105,7 +106,7 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
-                                                <input type="checkbox" name="checkWednesday"
+                                                <input type="checkbox" name="Wednesday"
                                                     aria-label="Checkbox for following text input">
                                             </div>
                                         </div>
@@ -120,7 +121,7 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
-                                                <input type="checkbox" name="checkThursday"
+                                                <input type="checkbox" name="Thursday"
                                                     aria-label="Checkbox for following text input">
                                             </div>
                                         </div>
@@ -135,7 +136,7 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">
-                                                <input type="checkbox" name="checkFriday"
+                                                <input type="checkbox" name="Friday"
                                                     aria-label="Checkbox for following text input">
                                             </div>
                                         </div>
@@ -205,7 +206,7 @@
                         <div class="row ">
                             <div class="col-lg-6 form-group">
                                 <label class="form-control-label" for="input-first-name">Tipo de periodo:</label>
-                                <select class="form-control">
+                                <select name="periodType" class="form-control">
                                     <option selected></option>
                                     <option value="1">Cuatrimestre</option>
                                     <option value="2">Semestre</option>

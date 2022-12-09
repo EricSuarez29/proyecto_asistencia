@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +21,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });*/
 
+//APIs de alumno
+
+Route::controller(StudentController::class)
+    ->prefix('students')
+    ->group(function () {
+        //Route::get('/', 'index')->name('index');
+        Route::get('/{student:id}', 'show')->name('show');
+    });
+
+Route::post('/group', [GroupController::class, 'store']);
+
 /*
 Route::group(['middleware' => ['auth:sanctum']], function(){
     //APIs de escuela
@@ -33,11 +46,6 @@ Route::group(['middleware' => ['auth:sanctum']], function(){
     Route::put('/career/update/{id}', [CareerController::class, 'update']);
     Route::delete('/career/delete/{id}', [CareerController::class, 'destroy']);
 
-    //APIs de alumno
-    Route::get('/student/getAll/{teacher_id}', [StudentController::class, 'index']);
-    Route::post('/student/insert', [StudentController::class, 'store']);
-    Route::put('/student/update/{id}', [StudentController::class, 'update']);
-    Route::delete('/student/delete/{id}', [StudentController::class, 'destroy']);
 
     //APIs de materia
     Route::get('/subject/getAll/{teacher_id}', [SubjectController::class, 'index']);
