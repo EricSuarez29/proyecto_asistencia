@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('class_hours', function (Blueprint $table) {
+        Schema::create('assistance_types', function (Blueprint $table) {
             $table->id();
-            $table->date('class_date');
-            $table->integer('class_day_id')->references('id')->on('class_days');
-            $table->timestamps();
-            $table->softDeletes();
+            $table->string('assistance_type');
         });
     }
 
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('class_hours');
+        Schema::dropIfExists('assistance_types');
     }
 };
