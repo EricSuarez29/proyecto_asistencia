@@ -31,7 +31,9 @@
 <div class="card">
 
     <div class="card-header border-0">
-        <h3 class="mb-0">IDCG 704 - Administración del Tiempo</h3>
+        <h3 class="mb-0">
+            {{ $attendanceList->group->getFullName() }} - {{ $attendanceList->subject->name }}
+        </h3>
     </div>
 
     <div class='row m-0'>
@@ -46,13 +48,13 @@
                     </thead>
                     <tbody class="list">
 
-                        @foreach (range(0, 20) as $i)
+                        @foreach ($attendanceList->group->students as $i => $student)
                         <tr>
                             <td>
-                                1
+                                {{ $i + 1 }}
                             </td>
                             <td>
-                                Eric Suarez Loera
+                                {{ $student->getFullName() }}
                             </td>
                         </tr>
                         @endforeach
@@ -66,22 +68,30 @@
                 <table class="table table-hover align-items-center table-flush">
                     <thead class="thead-light">
                         <tr>
-                            @foreach (range(0, 40) as $i)
-                            <th>{{ $i }}</th>
+                            @foreach ($attendanceList->classDays as $classDay)
+                            <th colspan="{{ $classDay->classHours()->count() }}"
+                                class="text-center px-0 border border-right " style="word-wrap: break-word;">{{
+                                $classDay->getFormated()
+                                }}</th>
                             @endforeach
+                            <th class="w-100"></th>
                         </tr>
                     </thead>
                     <tbody class="list">
 
-                        @foreach (range(0, 20) as $i)
+                        @foreach ($attendanceList->group->students as $student)
                         <tr>
-                            @foreach (range(0, 40) as $i)
-                            <td class="{{ $i < 20 ? 'bg-success' : '' }} text-white">
-                                A
+                            @foreach ($attendanceList->classDays as $classDay)
+                            @foreach($classDay->classHours as $classHour)
+                            <td style="word-wrap: break-word;"
+                                class="{{ $student->getTypeOfAssistanceAt($classHour)['type'] == 'A' ? 'bg-success' : '' }} p-0  text-white text-center">
+                                <input type='text' class="form-control" style="width: 50px">
                             </td>
+                            @endforeach
                             @endforeach
                         </tr>
                         @endforeach
+
                     </tbody>
                 </table>
             </div>

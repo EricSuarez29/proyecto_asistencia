@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('assistance_types', function (Blueprint $table) {
+        Schema::create('class_hours', function (Blueprint $table) {
             $table->id();
-            $table->string('assistance_type');
+            $table->integer('order');
+            $table->integer('class_day_id')->references('id')->on('class_days');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assistance_types');
+        Schema::dropIfExists('class_hours');
     }
 };

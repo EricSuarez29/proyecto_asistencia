@@ -8,10 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ClassHour extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
-        'class_date',
+        'order',
         'class_day_id'
     ];
+
+    public function assistances()
+    {
+        return $this->hasMany(StudentAssistance::class, '');
+    }
 }

@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('student_attendances', function (Blueprint $table) {
+        Schema::create('student_assistance', function (Blueprint $table) {
             $table->id();
             $table->integer('student_id')->references('id')->on('students');
-            $table->date('class_date');
-            $table->integer('assistance_type_id')->default('1')->references('id')->on('students');
-            $table->integer('class_day_id')->references('id')->on('class_days');
+            $table->integer('class_hour_id')->references('id')->on('class_hours');
+            $table->integer('assistance_type_id')->references('id')->on('assistance_types');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student_attendances');
+        Schema::dropIfExists('student_assistance');
     }
 };

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AttendanceList;
 use App\Models\ClassDay;
+use App\Models\ClassHour;
 use App\Models\Partial;
 use App\Models\Period;
 use Carbon\CarbonPeriod;
@@ -19,7 +20,8 @@ class AssistanceListController extends Controller
      */
     public function index()
     {
-        return view('pages.assitance.list');
+        $attendanceList = AttendanceList::all();
+        return view('pages.assitance.list', ['attendanceListes' => $attendanceList]);
     }
 
     /**
@@ -80,8 +82,8 @@ class AssistanceListController extends Controller
 
         $attendanceList = AttendanceList::create([
             'period_id' => $period->id,
-            'group_id' => $request['group'],
-            'subject_id' => $request['subject']
+            'group_id' => (int) $request['group'],
+            'subject_id' => (int) $request['subject']
         ]);
 
         // TODO Filter by inhabil dates
@@ -95,12 +97,19 @@ class AssistanceListController extends Controller
         foreach ($classDatesFormated as $classDate) {
             $classDay = ClassDay::create([
                 'class_date' => $classDate['class_date'],
-                'hours' => $classDate['hours'],
+                'hours' => (int) $classDate['hours'],
                 'attendance_list_id' => $attendanceList->id
             ]);
+
+            foreach (range(1, $classDay['hours']) as $order) {
+                ClassHour::create([
+                    'order' => $order,
+                    'class_day_id' => $classDay->id
+                ]);
+            }
         }
 
-        return response()->json($classDatesFormated);
+        return redirect()->route('assistanceList.index');
 
         /*
         foreach ($arreglo_fechas_clase as $fecha_clase) {
@@ -165,9 +174,9 @@ class AssistanceListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(AttendanceList $attendanceList)
     {
-        return view('pages.assitance.detail');
+        return view('pages.assitance.detail', ['attendanceList' => $attendanceList]);
     }
 
     /**

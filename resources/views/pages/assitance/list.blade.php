@@ -36,12 +36,14 @@
 
     <div class='p-5'>
         <div class='row row-cols-sm-2 row-cols-lg-4'>
-            <a href="{{ route('assistanceList.show', 'som') }}" class='card'>
+            @foreach ($attendanceListes as $attendanceList)
+            <a href="{{ route('assistanceList.show', $attendanceList) }}" class='card'>
                 <div class='card-body'>
-                    <h1 class="card-title mb-0">IDSG 704</h1>
-                    <p>Administración del tiempo</p>
+                    <h1 class="card-title mb-0">{{ $attendanceList->group->getFullName() }}</h1>
+                    <p>{{ $attendanceList->subject->name }}</p>
                 </div>
             </a>
+            @endforeach
         </div>
     </div>
 

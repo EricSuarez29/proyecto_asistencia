@@ -15,4 +15,24 @@ class Student extends Model
         'middle_name',
         'last_name',
     ];
+
+    public function getFullName()
+    {
+        return $this->name . ' ' . $this->last_name;
+    }
+
+    public function assistances()
+    {
+        return $this->hasMany(StudentAssistance::class, 'class_hour_id');
+    }
+
+    public function getTypeOfAssistanceAt($classHour)
+    {
+        $assistanceType = $this->assistances()
+            ->where('class_hour_id', $classHour->id)
+            ->with('assistanceType')
+            ->first();
+
+        return $assistanceType ?? ['type' => null];
+    }
 }

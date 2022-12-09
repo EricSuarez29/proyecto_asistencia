@@ -14,6 +14,20 @@ class AttendanceList extends Model
         'period_id',
         'group_id',
         'subject_id',
-        'teacher_id'
     ];
+
+    public function group()
+    {
+        return $this->hasOne(Group::class, 'id', 'group_id');
+    }
+
+    public function subject()
+    {
+        return $this->hasOne(Subject::class, 'id', 'subject_id');
+    }
+
+    public function classDays()
+    {
+        return $this->hasMany(ClassDay::class);
+    }
 }

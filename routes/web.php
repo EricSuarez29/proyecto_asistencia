@@ -30,7 +30,7 @@ Route::controller(AssistanceListController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
-        Route::get('/update/{id}', 'show')->name('show');
+        Route::get('/{attendanceList:id}', 'show')->name('show');
         Route::post('/', 'store')->name('store');
     });
 
