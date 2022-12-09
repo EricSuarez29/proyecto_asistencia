@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name', 50);
             $table->string('middle_name', 50);
             $table->string('last_name', 50);
-            $table->integer('teacher_id')->references('id')->on('teachers');
+            //$table->integer('teacher_id')->references('id')->on('teachers');
             $table->timestamps();
             $table->softDeletes();
         });

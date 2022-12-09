@@ -14,6 +14,5 @@ class Student extends Model
         'name',
         'middle_name',
         'last_name',
-        'teacher_id'
     ];
 }

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
-Route::get('/', fn () => view('pages.dashboard.dashboard'))->name('dashboard');
+Route::get('/', fn () => redirect()->route('assistanceList.index'));
 
 Route::controller(GroupController::class)
     ->name('group.')
@@ -19,7 +19,7 @@ Route::controller(GroupController::class)
     ->group(function () {
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
-        Route::get('/update/{id}', 'show')->name('show');
+        Route::get('/{group:id}', 'show')->name('show');
         Route::post('/', 'store')->name('store');
     });
 

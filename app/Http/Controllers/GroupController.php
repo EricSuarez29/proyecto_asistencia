@@ -43,7 +43,9 @@ class GroupController extends Controller
             ];
             return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
         }*/
-        return view('pages.group.list');
+
+        $groups = Group::all();
+        return view('pages.group.list', ['groups' => $groups]);
     }
 
     /**
@@ -53,7 +55,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('pages.group.form');
+        return view('pages.group.form', ['group' => null]);
     }
 
     /**
@@ -98,9 +100,9 @@ class GroupController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Group $group)
     {
-        $response_flag = 3;
+        /*$response_flag = 3;
         $result = null;
         $trace = null;
         try {
@@ -124,7 +126,9 @@ class GroupController extends Controller
                 "trace" => $trace
             ];
             return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
-        }
+        }*/
+
+        return view('pages.group.form', ['group' => $group]);
     }
 
     /**

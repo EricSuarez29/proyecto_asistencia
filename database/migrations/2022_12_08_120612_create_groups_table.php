@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('number', 5);
             $table->integer('career_id')->references('id')->on('careers');
-            $table->integer('teacher_id')->references('id')->on('teachers');
+            //$table->integer('teacher_id')->references('id')->on('teachers');
             $table->timestamps();
             $table->softDeletes();
         });

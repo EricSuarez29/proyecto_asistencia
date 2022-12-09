@@ -42,7 +42,20 @@
             @include('partials.footer')
         </main>
     </div>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@creative-tim-official/argon-dashboard-free@1.2.0/assets/vendor/jquery/dist/jquery.min.js">
+    </script>
+    <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@creative-tim-official/argon-dashboard-free@1.2.0/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@creative-tim-official/argon-dashboard-free@1.2.0/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js">
+    </script>
     @vite(['resources/js/index.js'])
+    <script src="https://cdn.jsdelivr.net/npm/@creative-tim-official/argon-dashboard-free@1.1.0/assets/js/argon.min.js">
+    </script>
     @stack('scripts')
 </body>
 

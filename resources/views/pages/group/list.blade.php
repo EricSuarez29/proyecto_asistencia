@@ -10,8 +10,8 @@
                 <div class="col-lg-6 col-7">
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                            <li class="breadcrumb-item"><a class="text-default" href="{{ route('dashboard') }}"><i
-                                        class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a class="text-default" href="/"><i class="fas fa-home"></i></a>
+                            </li>
                             <li class="breadcrumb-item active">
                                 Grupos
                             </li>
@@ -46,19 +46,21 @@
                         </tr>
                     </thead>
                     <tbody class="list">
+                        @foreach ($groups as $group)
                         <tr>
                             <td>
-                                <span class="name mb-0 text-sm">IDSG</span>
+                                <span class="name mb-0 text-sm">{{ $group->career->acronym }}</span>
                             </td>
                             <td class="budget">
-                                704
+                                {{ $group->number }}
                             </td>
                             <td>
-                                <a href="{{ route('group.show', 'hola' ) }}" class='btn btn-outline-danger btn-sm'>
-                                    <i class="fas fa-trash"></i>
+                                <a href="{{ route('group.show', $group ) }}" class='btn btn-outline-info btn-sm'>
+                                    <i class="fas fa-eye"></i>
                                 </a>
                             </td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

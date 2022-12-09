@@ -14,10 +14,11 @@
                 <div class="col-lg-6 col-7">
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i
-                                        class="fas fa-home"></i></a>
+                            <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a>
                             </li>
-                            <li class="breadcrumb-item active">Grupos</li>
+                            <li class="breadcrumb-item"><a href="{{ route('group.index') }}">Grupos</a>
+                            </li>
+                            <li class="breadcrumb-item active">Formulario</li>
                         </ol>
                     </nav>
                 </div>
@@ -46,14 +47,21 @@
                         <div class="form-group">
                             <label class="form-control-label" for="input-first-name">Carrera</label>
                             <select id="se" class="form-control">
-                                <option selected>Seleccionar...</option>
+                                <option>Seleccionar...</option>
+                                @foreach (\App\Models\Career::all() as $career)
+                                <option value='{{ $career->id }}' @if($group){{ $career->id == $group->career->id
+                                    ?"selected": ""}}@endif
+                                    >{{
+                                    $career->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label class="form-control-label" for="input-last-name">Número de grupo</label>
-                            <input type="text" id="input-last-name" class="form-control" placeholder="Número de grupo">
+                            <input type="text" id="input-last-name" class="form-control" @if($group)
+                                value="{{ $group->number }}" @endif placeholder="Número de grupo">
                         </div>
                     </div>
                 </div>
@@ -108,23 +116,19 @@
                                     <tr>
                                         <th scope="col" class="sort" data-sort="budget">Matrícula</th>
                                         <th scope="col" class="sort" data-sort="name">Nombre</th>
-                                        <th scope="col" class="sort" data-sort="status">Estatus</th>
-                                        <th scope="col" class="sort" data-sort="delete">Eliminar</th>
+                                        <th scope="col" class="sort" data-sort="delete"></th>
                                     </tr>
                                 </thead>
                                 <tbody class="list">
+                                    @if ($group && $group->students)
+                                    @foreach ($group->students as $student)
                                     <tr>
                                         <td class="budget">
-                                            20000001
+                                            {{ $student->id }}
                                         </td>
                                         <td>
-                                            <span class="name mb-0 text-sm">Iván Moisés Ornelas Meza</span>
-                                        </td>
-                                        <td>
-                                            <span class="badge badge-dot mr-4">
-                                                <i class="bg-success"></i>Activo
-                                                <span class="status"></span>
-                                            </span>
+                                            <span class="name mb-0 text-sm">{{ $student->name . " " . $student->lastname
+                                                }}</span>
                                         </td>
                                         <td>
                                             <a href="{{ route('group.show', 'hola') }}"
@@ -133,6 +137,8 @@
                                             </a>
                                         </td>
                                     </tr>
+                                    @endforeach
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

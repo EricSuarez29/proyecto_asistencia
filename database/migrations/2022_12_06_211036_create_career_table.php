@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name', 100);
             $table->string('acronym', 5);
             $table->integer('school_id')->references('id')->on('schools');
-            $table->integer('teacher_id')->references('id')->on('teachers');
+            //$table->integer('teacher_id')->references('id')->on('teachers');
             $table->timestamps();
             $table->softDeletes();
         });

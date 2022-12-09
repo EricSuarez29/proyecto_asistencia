@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('teacher_id')->references('id')->on('teacher_id');
+            //$table->integer('teacher_id')->references('id')->on('teacher_id');
             $table->timestamps();
             $table->softDeletes();
         });

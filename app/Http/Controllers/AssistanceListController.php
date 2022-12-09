@@ -23,7 +23,7 @@ class AssistanceListController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.assitance.generator');
     }
 
     /**

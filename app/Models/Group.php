@@ -13,11 +13,20 @@ class Group extends Model
     protected $fillable = [
         'number',
         'career_id',
-        'teacher_id'
     ];
 
     public function students()
     {
         return $this->belongsToMany(Student::class);
+    }
+
+    public function career()
+    {
+        return $this->belongsTo(Career::class);
+    }
+
+    public function getFullName()
+    {
+        return $this->career->acronym . " " . $this->number;
     }
 }
