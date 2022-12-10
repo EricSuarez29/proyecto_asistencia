@@ -192,10 +192,11 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                         </div>
-                                        <input class="form-control" name="startDatePeriod" placeholder="Fecha inicio"
+                                        <input class="form-control" name="startDateFirstPartial"
+                                            value="{{ old('startDateFirstPartial') }}" placeholder="Fecha inicio"
                                             type="text" value="">
                                     </div>
-                                    @error('startDatePeriod')
+                                    @error('startDateFirstPartial')
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -206,10 +207,11 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                         </div>
-                                        <input class="form-control" name="endDatePeriod" placeholder="Fecha fin"
-                                            type="text" value="">
+                                        <input class="form-control" name="endDateThirdPartial"
+                                            value="{{ old('endDateThirdPartial')}}" placeholder="Fecha fin" type="text"
+                                            value="">
                                     </div>
-                                    @error('endDatePeriod')
+                                    @error('endDateThirdPartial')
                                     <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -245,10 +247,11 @@
                                                     <span class="input-group-text"><i
                                                             class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
-                                                <input class="form-control" name="startDateFirstPartial"
+                                                <input class="form-control" name="startDateFirstPartial_confirmation"
+                                                    value="{{ old('startDateFirstPartial_confirmation') }}"
                                                     placeholder="Fecha inicio" type="text" value="">
                                             </div>
-                                            @error('startDateFirstPartial')
+                                            @error('startDateFirstPartial_confirmation')
                                             <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
@@ -261,7 +264,8 @@
                                                             class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
                                                 <input class="form-control" name="endDateFirstPartial"
-                                                    placeholder="Fecha inicio" type="text" value="">
+                                                    value="{{ old('endDateFirstPartial') }}" placeholder="Fecha inicio"
+                                                    type="text" value="">
                                             </div>
                                             @error('endDateFirstPartial')
                                             <div class="text-danger">{{ $message }}</div>
@@ -285,6 +289,7 @@
                                                             class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
                                                 <input class="form-control" name="startDateSecondPartial"
+                                                    value="{{ old('startDateSecondPartial') }}"
                                                     placeholder="Fecha inicio" type="text" value="">
                                             </div>
                                             @error('startDateSecondPartial')
@@ -300,7 +305,8 @@
                                                             class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
                                                 <input class="form-control" name="endDateSecondPartial"
-                                                    placeholder="Fecha inicio" type="text" value="">
+                                                    value="{{ old('endDateSecondPartial') }}" placeholder="Fecha inicio"
+                                                    type="text" value="">
                                             </div>
                                             @error('endDateSecondPartial')
                                             <div class="text-danger">{{ $message }}</div>
@@ -324,6 +330,7 @@
                                                             class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
                                                 <input class="form-control" name="startDateThirdPartial"
+                                                    value="{{ old('startDateThirdPartial') }}"
                                                     placeholder="Fecha inicio" type="text" value="">
                                             </div>
                                             @error('startDateThirdPartial')
@@ -338,10 +345,11 @@
                                                     <span class="input-group-text"><i
                                                             class="ni ni-calendar-grid-58"></i></span>
                                                 </div>
-                                                <input class="form-control" name="endDateThirdPartial"
+                                                <input class="form-control" name="endDateThirdPartial_confirmation"
+                                                    value="{{ old('endDateThirdPartial_confirmation') }}"
                                                     placeholder="Fecha inicio" type="text" value="">
                                             </div>
-                                            @error('endDateThirdPartial')
+                                            @error('endDateThirdPartial_confirmation')
                                             <div class="text-danger">{{ $message }}</div>
                                             @enderror
                                         </div>

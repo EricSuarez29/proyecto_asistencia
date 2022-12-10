@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\StudentController;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +28,9 @@ Route::controller(StudentController::class)
     ->prefix('students')
     ->group(function () {
         //Route::get('/', 'index')->name('index');
-        Route::get('/{student:id}', 'show')->name('show');
+        Route::get('/{student:id}', function (Student $student) {
+            return response()->json($student);
+        });
     });
 
 Route::post('/group', [GroupController::class, 'store']);

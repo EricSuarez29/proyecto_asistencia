@@ -21,6 +21,11 @@ class Student extends Model
         return $this->name . ' ' . $this->last_name;
     }
 
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class);
+    }
+
     public function assistances()
     {
         return $this->hasMany(StudentAssistance::class);
@@ -51,9 +56,12 @@ class Student extends Model
 
     public function getPerAssistance($attendanceList)
     {
-        $assistances = collect($this->assistances)->filter(fn ($item) => strtolower($item->status) === 'a' || strtolower($item->status) === 'r')->count();
+        $classHoursIds = collect(collect($attendanceList->classDays)->reduce(fn ($carry, $classDay) => [...$carry, $classDay->classHours], []))->flatten(1)->map(fn ($item) => $item->id)->all();
+        $assistances = StudentAssistance::where('student_id', $this->id)
+            ->whereIn('status', ['r', 'R', 'a', 'A'])
+            ->whereIn('class_hour_id', $classHoursIds)->count();
         $classHours = collect($attendanceList->classDays)->reduce(fn ($carry, $classDay) => $carry + $classDay->classHours()->count(), 0);
 
-        return (int) ($assistances * (100 / $classHours));
+        return (int) ($assistances * (100 / (int) $classHours));
     }
 }

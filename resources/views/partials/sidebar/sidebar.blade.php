@@ -27,15 +27,15 @@ $routes = [
 ];
 @endphp
 
-<nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+<nav class="sidenav navbar navbar-vertical fixed-left navbar-expand-xs navbar-light bg-white" id="sidenav-main">
     <div class="scrollbar-inner">
-
-        <div class="sidenav-header  align-items-center">
-            <a class="navbar-brand" href="javascript:void(0)">
-                <img src="../assets-old/img/brand/blue.png" class="navbar-brand-img" alt="...">
+        <div class="sidenav-header align-items-center py-4">
+            <a class="" href="javascript:void(0)">
+                <img src="{{ asset('assets/images/logo.png') }}" class="w-75 rounded" alt="Logo">
             </a>
         </div>
-        <div class="navbar-inner">
+        <hr class="py-4">
+        <div class="navbar-inner mt-5">
 
             <div class="collapse navbar-collapse" id="sidenav-collapse-main">
 

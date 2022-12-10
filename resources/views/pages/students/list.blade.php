@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Grupos')
+@section('title', 'Alumnos')
 
 @section('header')
 <div class="header bg-default pb-6">
@@ -17,6 +17,9 @@
                             </li>
                         </ol>
                     </nav>
+                </div>
+                <div class="col-lg-6 col-5 text-right">
+                    <a href="{{ route('students.create') }}" class="btn btn-neutral text-default">Nuevo</a>
                 </div>
             </div>
         </div>
@@ -40,6 +43,7 @@
                             <th scope="col" class="sort" data-sort="id">Matricula</th>
                             <th scope="col" class="sort" data-sort="name">Nombre</th>
                             <th scope="col" class="sort" data-sort="lastname">Apellidos</th>
+                            <th scope="col" class="sort" data-sort="lastname">Detalles</th>
                         </tr>
                     </thead>
                     <tbody class="list">
@@ -53,6 +57,11 @@
                             </td>
                             <td>
                                 {{ $student->last_name }}
+                            </td>
+                            <td>
+                                <a href="{{ route('students.show', $student ) }}" class='btn btn-outline-info btn-sm'>
+                                    <i class="fas fa-eye"></i>
+                                </a>
                             </td>
                         </tr>
                         @endforeach

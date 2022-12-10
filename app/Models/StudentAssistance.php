@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use PHPUnit\Framework\MockObject\Builder\Stub;
 
 class StudentAssistance extends Model
 {
@@ -15,4 +16,14 @@ class StudentAssistance extends Model
         'class_hour_id',
         'status'
     ];
+
+    public function classHour()
+    {
+        return $this->hasOne(ClassHour::class);
+    }
+
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
 }

@@ -66,20 +66,18 @@ class AssistanceListController extends Controller
         $request->validate([
             'group' => 'required',
             'subject' => 'required',
-            'startDatePeriod' => 'required',
-            'endDatePeriod' => 'required',
             'periodType' => 'required',
-            'startDateFirstPartial' => 'required',
+            'startDateFirstPartial' => 'required|confirmed',
             'endDateFirstPartial' => 'required',
             'startDateSecondPartial' => 'required',
             'endDateSecondPartial' => 'required',
             'startDateThirdPartial' => 'required',
-            'endDateThirdPartial' => 'required',
+            'endDateThirdPartial' => 'required|confirmed',
         ]);
 
         $period = Period::create([
-            'start_period' => (new static)::getFormatedDate($request['startDatePeriod']),
-            'end_period' => (new static)::getFormatedDate($request['endDatePeriod']),
+            'start_period' => (new static)::getFormatedDate($request['startDateFirstPartial']),
+            'end_period' => (new static)::getFormatedDate($request['endDateThirdPartial']),
             'period_type_id' => (int) $request['periodType']
         ]);
 

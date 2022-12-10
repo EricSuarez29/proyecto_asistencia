@@ -46,7 +46,7 @@
                     </thead>
                     <tbody class="list">
 
-                        @foreach ($students as $id => $student)
+                        @foreach ($attendanceList->group->students as $id => $student)
                         <tr>
                             @foreach ($attendanceList->classDays as $classDay)
                             @foreach($classDay->classHours as $index => $classHour)
@@ -90,7 +90,7 @@
                     </thead>
                     <tbody class="list">
 
-                        @foreach ($students as $student)
+                        @foreach ($attendanceList->group->students as $student)
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center">

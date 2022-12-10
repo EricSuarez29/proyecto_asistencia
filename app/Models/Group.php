@@ -25,6 +25,11 @@ class Group extends Model
         return $this->belongsTo(Career::class);
     }
 
+    public function attendanceList()
+    {
+        return $this->hasMany(AttendanceList::class);
+    }
+
     public function getFullName()
     {
         return $this->career->acronym . " " . $this->number;

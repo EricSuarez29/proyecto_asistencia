@@ -39,6 +39,9 @@ Route::controller(StudentController::class)
     ->prefix('students')
     ->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::get('/{student:id}', 'show')->name('show');
+        Route::post('/', 'store')->name('store');
     });
 
 //Attendance List section

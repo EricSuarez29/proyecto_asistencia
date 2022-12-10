@@ -45,8 +45,8 @@
                     {{-- Campos para agregar grupo --}}
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="input-first-name">Carrera</label>
-                            <select id="se" class="form-control">
+                            <label class="form-control-label" for="carerId">Carrera</label>
+                            <select id="careerId" class="form-control">
                                 <option>Seleccionar...</option>
                                 @foreach (\App\Models\Career::all() as $career)
                                 <option value='{{ $career->id }}' @if($group){{ $career->id == $group->career->id
@@ -59,9 +59,11 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="form-control-label" for="input-last-name">Número de grupo</label>
-                            <input type="text" id="input-last-name" class="form-control" @if($group)
-                                value="{{ $group->number }}" @endif placeholder="Número de grupo">
+                            <label class="form-control-label" for="groupNumber">Número de grupo</label>
+                            <input type="text" id="groupNumber" class="form-control" @if($group)
+                                value="{{ $group->number }}" @endif
+                                onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"
+                                placeholder="Número de grupo">
                         </div>
                     </div>
                 </div>
@@ -85,9 +87,9 @@
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="form-group">
-                                                    <label class="form-control-label"
-                                                        for="input-first-name">Matrícula</label>
-                                                    <input type="number" id="input-first-name" class="form-control"
+                                                    <label class="form-control-label" for="matricula">Matrícula</label>
+                                                    <input type="number" id="matricula" class="form-control"
+                                                        onkeypress="if ( isNaN( String.fromCharCode(event.keyCode) )) return false;"
                                                         placeholder="Matrícula">
                                                 </div>
                                                 <div class="text-right">
@@ -119,7 +121,7 @@
                                         <th scope="col" class="sort" data-sort="delete"></th>
                                     </tr>
                                 </thead>
-                                <tbody class="list">
+                                <tbody class="list" id="tablaAlumnos">
                                     @if ($group && $group->students)
                                     @foreach ($group->students as $student)
                                     <tr>
@@ -144,8 +146,9 @@
                         </div>
                     </div>
                 </div>
-                <div class='d-flex justify-content-center w-100 my-3'>
+                <div class='d-flex gap-3 justify-content-center w-100 my-3'>
                     <button type="submit" class="btn btn-outline-default">Guardar</button>
+                    <a href="{{ route('group.index') }}" class="btn btn-outline-danger">Cerrar</a>
                 </div>
             </div>
         </form>

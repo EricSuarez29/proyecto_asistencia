@@ -52,9 +52,9 @@ class StudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Student $student)
     {
-        //
+        return view('pages.students.form', ['student' => $student]);
     }
 
     /**
@@ -65,7 +65,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        $response_flag = 3;
+        /*$response_flag = 3;
         $result = null;
         $trace = null;
         try {
@@ -87,7 +87,14 @@ class StudentController extends Controller
                 "trace" => $trace
             ];
             return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
-        }
+        }*/
+
+        Student::create([
+            "name" => $request['input-first-name'],
+            "middle_name" => $request['input-paternal-last-name'],
+            "last_name" => $request['input-maternal-last-name']
+        ]);
+        return redirect()->route('students.index');
     }
 
     /**
@@ -98,7 +105,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        return response()->json($student);
+        return view('pages.students.form', ['student' => $student]);
     }
 
     /**
