@@ -13,11 +13,6 @@ class StudentAssistance extends Model
     protected $fillable = [
         'student_id',
         'class_hour_id',
-        'assistance_type_id'
+        'status'
     ];
-
-    public function assistanceType()
-    {
-        return $this->hasOne(AssistanceType::class, 'id', 'assistance_type_id');
-    }
 }

@@ -9,6 +9,7 @@
 
     <!-- Styles -->
     @vite(['resources/scss/index.scss'])
+    @livewireStyles
 </head>
 
 <body>
@@ -57,6 +58,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@creative-tim-official/argon-dashboard-free@1.1.0/assets/js/argon.min.js">
     </script>
     @stack('scripts')
+    @livewireScripts
 </body>
 
 </html>

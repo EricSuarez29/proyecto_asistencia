@@ -36,72 +36,7 @@
         </h3>
     </div>
 
-    <div class='row m-0'>
-        <div class='col-3 px-0'>
-            <div class="table-responsive">
-                <table class="table table-hover align-items-center table-flush">
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="col-2">#</th>
-                            <th>Nombre</th>
-                        </tr>
-                    </thead>
-                    <tbody class="list">
-
-                        @foreach ($attendanceList->group->students as $i => $student)
-                        <tr>
-                            <td>
-                                {{ $i + 1 }}
-                            </td>
-                            <td>
-                                {{ $student->getFullName() }}
-                            </td>
-                        </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class='col-9 px-0'>
-            <div class="table-responsive">
-                <table class="table table-hover align-items-center table-flush">
-                    <thead class="thead-light">
-                        <tr>
-                            @foreach ($attendanceList->classDays as $classDay)
-                            <th colspan="{{ $classDay->classHours()->count() }}"
-                                class="text-center px-0 border border-right "
-                                style="word-wrap: break-word; transform: rotate(90deg)">{{
-                                $classDay->getFormated()
-                                }}</th>
-                            @endforeach
-                            <th class="w-100"></th>
-                        </tr>
-                    </thead>
-                    <tbody class="list">
-
-                        @foreach ($attendanceList->group->students as $student)
-                        <tr>
-                            @foreach ($attendanceList->classDays as $classDay)
-                            @foreach($classDay->classHours as $classHour)
-                            <td style="word-wrap: break-word;"
-                                class="{{ $student->getTypeOfAssistanceAt($classHour)['type'] == 'A' ? 'bg-success' : '' }} p-0  text-white text-center">
-                                <input type='text' class="form-control" style="width: 50px">
-                            </td>
-                            @endforeach
-                            @endforeach
-                        </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <div class='my-5 d-flex justify-content-center'>
-        <button class='btn btn-primary'>Guardar</button>
-    </div>
+    <livewire:assistance-list :attendanceList="$attendanceList" />
 
 </div>
 @endsection

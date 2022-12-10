@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('student_id')->references('id')->on('students');
             $table->integer('class_hour_id')->references('id')->on('class_hours');
-            $table->integer('assistance_type_id')->references('id')->on('assistance_types');
+            $table->string('status');
             $table->timestamps();
         });
     }

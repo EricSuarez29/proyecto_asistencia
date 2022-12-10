@@ -28,6 +28,6 @@ class ClassDay extends Model
 
     public function getFormated()
     {
-        return $this->class_date->format('d M');
+        return $this->class_date->format('d');
     }
 }

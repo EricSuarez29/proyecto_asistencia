@@ -48,21 +48,27 @@
                                 <div class="form-group">
                                     <label class="form-control-label" for="input-first-name">Materia:</label>
                                     <select name="subject" class="form-control">
-                                        <option selected>Selecione una Materia</option>
+                                        <option value="">Selecione una Materia</option>
                                         @foreach (\App\Models\Subject::all() as $subject)
                                         <option value='{{ $subject->id }}'>{{ $subject->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('subject')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-lg-6 form-group">
                                 <label class="form-control-label" for="input-first-name">Grupo:</label>
                                 <select name="group" class="form-control">
-                                    <option>Selecione un grupo</option>
+                                    <option value="">Selecione un grupo</option>
                                     @foreach (\App\Models\Group::all() as $group)
                                     <option value='{{ $group->id }}'>{{ $group->getFullName() }}</option>
                                     @endforeach
                                 </select>
+                                @error('group')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div style="color:#5e72e4;">
@@ -189,6 +195,9 @@
                                         <input class="form-control" name="startDatePeriod" placeholder="Fecha inicio"
                                             type="text" value="">
                                     </div>
+                                    @error('startDatePeriod')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col">
@@ -200,6 +209,9 @@
                                         <input class="form-control" name="endDatePeriod" placeholder="Fecha fin"
                                             type="text" value="">
                                     </div>
+                                    @error('endDatePeriod')
+                                    <div class="text-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -212,6 +224,9 @@
                                     <option value="2">Semestre</option>
                                     <option value="3">Ciclo anual</option>
                                 </select>
+                                @error('periodType')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                         </div>
                         <div>
@@ -233,6 +248,9 @@
                                                 <input class="form-control" name="startDateFirstPartial"
                                                     placeholder="Fecha inicio" type="text" value="">
                                             </div>
+                                            @error('startDateFirstPartial')
+                                            <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class='col-sm-6'>
@@ -245,6 +263,9 @@
                                                 <input class="form-control" name="endDateFirstPartial"
                                                     placeholder="Fecha inicio" type="text" value="">
                                             </div>
+                                            @error('endDateFirstPartial')
+                                            <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -266,6 +287,9 @@
                                                 <input class="form-control" name="startDateSecondPartial"
                                                     placeholder="Fecha inicio" type="text" value="">
                                             </div>
+                                            @error('startDateSecondPartial')
+                                            <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class='col-sm-6'>
@@ -278,6 +302,9 @@
                                                 <input class="form-control" name="endDateSecondPartial"
                                                     placeholder="Fecha inicio" type="text" value="">
                                             </div>
+                                            @error('endDateSecondPartial')
+                                            <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -299,6 +326,9 @@
                                                 <input class="form-control" name="startDateThirdPartial"
                                                     placeholder="Fecha inicio" type="text" value="">
                                             </div>
+                                            @error('startDateThirdPartial')
+                                            <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class='col-sm-6'>
@@ -311,6 +341,9 @@
                                                 <input class="form-control" name="endDateThirdPartial"
                                                     placeholder="Fecha inicio" type="text" value="">
                                             </div>
+                                            @error('endDateThirdPartial')
+                                            <div class="text-danger">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>

@@ -23,16 +23,37 @@ class Student extends Model
 
     public function assistances()
     {
-        return $this->hasMany(StudentAssistance::class, 'class_hour_id');
+        return $this->hasMany(StudentAssistance::class);
     }
 
     public function getTypeOfAssistanceAt($classHour)
     {
         $assistanceType = $this->assistances()
             ->where('class_hour_id', $classHour->id)
-            ->with('assistanceType')
             ->first();
 
-        return $assistanceType ?? ['type' => null];
+        return $assistanceType ?? ['status' => ''];
+    }
+
+    public function getBgColorAssistance($classHour)
+    {
+        $status = $this->getTypeOfAssistanceAt($classHour)['status'];
+
+        $colors = [
+            'A' => 'bg-success text-white',
+            'F' => 'bg-danger text-white',
+            'J' => 'bg-info text-white',
+            'R' => 'bg-warning text-white'
+        ];
+
+        return $colors[strtoupper($status)] ?? '';
+    }
+
+    public function getPerAssistance($attendanceList)
+    {
+        $assistances = collect($this->assistances)->filter(fn ($item) => strtolower($item->status) === 'a' || strtolower($item->status) === 'r')->count();
+        $classHours = collect($attendanceList->classDays)->reduce(fn ($carry, $classDay) => $carry + $classDay->classHours()->count(), 0);
+
+        return (int) ($assistances * (100 / $classHours));
     }
 }
