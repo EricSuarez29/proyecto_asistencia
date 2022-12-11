@@ -41,6 +41,7 @@ Route::controller(StudentController::class)
         Route::get('/', 'index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::get('/{student:id}', 'show')->name('show');
+        Route::post('/destroy/{student:id}', 'destroy')->name('destroy');
         Route::post('/', 'store')->name('store');
     });
 

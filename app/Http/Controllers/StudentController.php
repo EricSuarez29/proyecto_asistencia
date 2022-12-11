@@ -128,32 +128,39 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response_flag = 3;
-        $result = null;
-        $trace = null;
-        try {
-            $student = Student::find($id);
-            $student->name = $request->name;
-            $student->middle_name = $request->middle_name;
-            $student->last_name = $request->last_name;
-            $student->save();
-            $response_flag = 1;
-        } catch (\ErrorException $e) {
-            $response_flag = 2;
-            $result = $e->getMessage();
-            $trace = $e->getTrace();
-        } catch (\Illuminate\Database\QueryException $e) {
-            $response_flag = 2;
-            $result = $e->errorInfo[2];
-            $trace = $e->getTrace();
-        } finally {
-            $data = [
-                "response" => $result,
-                "response_flag" => $response_flag,
-                "trace" => $trace
-            ];
-            return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
-        }
+        // $response_flag = 3;
+        // $result = null;
+        // $trace = null;
+        // try {
+        //     $student = Student::find($id);
+        //     $student->name = $request->name;
+        //     $student->middle_name = $request->middle_name;
+        //     $student->last_name = $request->last_name;
+        //     $student->save();
+        //     $response_flag = 1;
+        // } catch (\ErrorException $e) {
+        //     $response_flag = 2;
+        //     $result = $e->getMessage();
+        //     $trace = $e->getTrace();
+        // } catch (\Illuminate\Database\QueryException $e) {
+        //     $response_flag = 2;
+        //     $result = $e->errorInfo[2];
+        //     $trace = $e->getTrace();
+        // } finally {
+        //     $data = [
+        //         "response" => $result,
+        //         "response_flag" => $response_flag,
+        //         "trace" => $trace
+        //     ];
+        //     return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
+        // }
+        $student = Student::find($id);
+        $student->name = $request->name;
+        $student->middle_name = $request->middle_name;
+        $student->last_name = $request->last_name;
+        $student->save();
+
+        return redirect()->route('students.index');
     }
 
     /**
@@ -162,30 +169,33 @@ class StudentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Student $student)
     {
-        $response_flag = 3;
-        $result = null;
-        $trace = null;
-        try {
-            $student = Student::find($id);
-            $student->delete();
-            $response_flag = 1;
-        } catch (\ErrorException $e) {
-            $response_flag = 2;
-            $result = $e->getMessage();
-            $trace = $e->getTrace();
-        } catch (\Illuminate\Database\QueryException $e) {
-            $response_flag = 2;
-            $result = $e->errorInfo[2];
-            $trace = $e->getTrace();
-        } finally {
-            $data = [
-                "response" => $result,
-                "response_flag" => $response_flag,
-                "trace" => $trace
-            ];
-            return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
-        }
+        // $response_flag = 3;
+        // $result = null;
+        // $trace = null;
+        // try {
+        //     $student = Student::find($id);
+        //     $student->delete();
+        //     $response_flag = 1;
+        // } catch (\ErrorException $e) {
+        //     $response_flag = 2;
+        //     $result = $e->getMessage();
+        //     $trace = $e->getTrace();
+        // } catch (\Illuminate\Database\QueryException $e) {
+        //     $response_flag = 2;
+        //     $result = $e->errorInfo[2];
+        //     $trace = $e->getTrace();
+        // } finally {
+        //     $data = [
+        //         "response" => $result,
+        //         "response_flag" => $response_flag,
+        //         "trace" => $trace
+        //     ];
+        //     return response()->json($data, 200, [JSON_UNESCAPED_UNICODE]);
+        // }
+        $student->delete();
+
+        return redirect()->route('students.index');
     }
 }

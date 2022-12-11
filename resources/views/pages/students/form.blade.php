@@ -46,6 +46,14 @@
                             <div class="col-8">
                                 <h3 class="mb-0">Agregar alumno</h3>
                             </div>
+                            @if($student->id != null)
+                                <form action="{{ route('students.destroy', $student) }}" method="POST">
+                                    @csrf
+                                    <div class="col-4 text-right">
+                                        <button type="submit" class="btn btn-outline-danger">Borrar</button>
+                                    </div>
+                                </form>
+                            @endif
                         </div>
                         <div class="card-body">
                             <form action="{{ route('students.store') }}" method="POST">

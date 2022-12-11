@@ -43,7 +43,7 @@
                             <th scope="col" class="sort" data-sort="id">Matricula</th>
                             <th scope="col" class="sort" data-sort="name">Nombre</th>
                             <th scope="col" class="sort" data-sort="lastname">Apellidos</th>
-                            <th scope="col" class="sort" data-sort="lastname">Detalles</th>
+                            <th scope="col" class="sort" data-sort="details">Edit</th>
                         </tr>
                     </thead>
                     <tbody class="list">
